@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuyển đổi số</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+            text-align: center;
+            width: 80%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .row {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .circle {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+            font-weight: bold;
+            color: white;
+        }
+        .C { background-color: #1E88E5; }  /* Xanh */
+        .L { background-color: #FFC107; }  /* Vàng */
+    </style>
+</head>
+<body>
+    <input type="text" id="numberInput" placeholder="..." oninput="updateDisplay()">
+    
+    <div class="container">
+        <div class="row" id="clRow"></div>
+    </div>
+
+    <script>
+        function updateDisplay() {
+            let inputText = document.getElementById("numberInput").value;
+            let numbers = inputText.split(/[\s,]+/).map(n => parseInt(n)).filter(n => !isNaN(n) && n >= 0 && n <= 99);
+
+            let clRowHtml = "";
+
+            numbers.forEach(num => {
+                let cl = (num % 2 === 0) ? 'C' : 'L';
+                clRowHtml += `<span class="circle ${cl}">${cl}</span>`;
+            });
+
+            document.getElementById("clRow").innerHTML = clRowHtml;
+        }
+    </script>
+</body>
+</html>
